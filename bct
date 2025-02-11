@@ -1,0 +1,26 @@
+public class Main
+{
+	public static void main(String[] args)
+	{
+	    
+	    scanner scan = new scanner(System.in);    
+        int opcao;
+	    System.out.println("-------------------------------");
+	    System.out.println(" \t Menu \n");
+	    System.out.println("-------------------------------");
+	    System.out.println("[1] Adição");
+	    System.out.println("[2] Subtração");
+	    System.out.println("[3] multipicação");
+	    System.out.println("[4] Divisão");
+	    System.out.println("[0] Sair");
+	
+	    opcao = scan.nextint();
+	    System.out.System.out.printf("A opcao escolhida foi : %d \n", opcao);
+	    
+	    if (opcao ) 
+	
+	scan.close ();
+	
+	}
+
+}
