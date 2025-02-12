@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+      
+        for (;;) {
+            System.out.println("-------------------------------");
+            System.out.println(" \t Menu \n");
+            System.out.println("-------------------------------");
+            System.out.println("Escolha uma opção");
+            System.out.println("[1] Adição");
+            System.out.println("[2] Subtração");
+            System.out.println("[3] Multiplicação");
+            System.out.println("[4] Divisão");
+            System.out.println("[0] Sair");
+
+            int opcao = scan.nextInt(); 
+            System.out.printf("A opção escolhida foi: %d \n", opcao);
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Você escolheu: Adição");
+                    break;
+                case 2:
+                    System.out.println("Você escolheu: Subtração");
+                    break;
+                case 3:
+                    System.out.println("Você escolheu: Multiplicação");
+                    break;
+                case 4:
+                    System.out.println("Você escolheu: Divisão");
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    scan.close();  
+                    return; 
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+                    break;
+            }
+        }
+    }
+}
