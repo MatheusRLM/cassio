@@ -1,46 +1,33 @@
 import java.util.Scanner;
 
-
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        int opcao;
 
-      
-        for (;;) {
-            System.out.println("-------------------------------");
-            System.out.println(" \t Menu \n");
-            System.out.println("-------------------------------");
-            System.out.println("Escolha uma opção");
-            System.out.println("[1] Adição");
-            System.out.println("[2] Subtração");
-            System.out.println("[3] Multiplicação");
-            System.out.println("[4] Divisão");
-            System.out.println("[0] Sair");
+        do {
+            System.out.println("\n[1] Adição\n[2] Subtração\n[3] Multiplicação\n[4] Divisão\n[0] Sair");
+            opcao = scan.nextInt();
 
-            int opcao = scan.nextInt(); 
-            System.out.printf("A opção escolhida foi: %d \n", opcao);
+            if (opcao == 0) break;
+
+            System.out.print("Digite o primeiro número: ");
+            double num1 = scan.nextDouble();
+            System.out.print("Digite o segundo número: ");
+            double num2 = scan.nextDouble();
 
             switch (opcao) {
-                case 1:
-                    System.out.println("Você escolheu: Adição");
+                case 1: System.out.println(num1 + num2); break;
+                case 2: System.out.println(num1 - num2); break;
+                case 3: System.out.println(num1 * num2); break;
+                case 4: 
+                    if (num2 != 0) System.out.println(num1 / num2);
+                    else System.out.println("Erro! Divisão por zero.");
                     break;
-                case 2:
-                    System.out.println("Você escolheu: Subtração");
-                    break;
-                case 3:
-                    System.out.println("Você escolheu: Multiplicação");
-                    break;
-                case 4:
-                    System.out.println("Você escolheu: Divisão");
-                    break;
-                case 0:
-                    System.out.println("Saindo...");
-                    scan.close();  
-                    return; 
-                default:
-                    System.out.println("Opção inválida! Tente novamente.");
-                    break;
+                default: System.out.println("Opção inválida.");
             }
-        }
+        } while (opcao != 0);
+
+        scan.close();
     }
 }
