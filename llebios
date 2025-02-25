@@ -1,0 +1,88 @@
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Digite o número da conta: ");
+        int numeroConta = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Digite o nome do titular da conta: ");
+        String nomeTitular = scanner.nextLine();
+
+        System.out.print("Digite o limite da conta: ");
+        double limiteConta = scanner.nextDouble();
+
+        System.out.print("Digite o saldo inicial da conta: ");
+        double saldoInicial = scanner.nextDouble();
+
+        ContaBancaria conta = new ContaBancaria(numeroConta, nomeTitular, limiteConta, saldoInicial);
+
+        while (true) {
+            System.out.println("\nEscolha uma opção:");
+            System.out.println("1 - Depósito");
+            System.out.println("2 - Saque");
+            System.out.println("3 - Exibir Dados da Conta");
+            System.out.println("4 - Sair");
+            System.out.print("Digite sua opção: ");
+            int opcao = scanner.nextInt();
+
+            if (opcao == 1) {
+                System.out.print("Digite o valor para depósito: ");
+                double valorDeposito = scanner.nextDouble();
+                conta.depositar(valorDeposito);
+            } else if (opcao == 2) {
+                System.out.print("Digite o valor para saque: ");
+                double valorSaque = scanner.nextDouble();
+    
+    public void depositar(double valor) {
+        if (valor <= 0) {
+            System.out.println("Valor de depósito inválido.");
+        } else {
+            saldo += valor;
+            System.out.println("Depósito de " + valor + " realizado com sucesso.");
+        }
+    }
+
+    public void exibirDados() {
+        System.out.println("\n--- Dados da Conta ---");
+        System.out.println("Conta: " + numero);
+        System.out.
+
+            conta.sacar(valorSaque);
+            } else if (opcao == 3) {
+                conta.exibirDados();
+            } else if (opcao == 4) {
+                System.out.println("Saindo...");
+                break;
+            } else {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+
+        scanner.close();
+    }
+}
+
+class ContaBancaria {
+    private int numero;
+    private String nome;
+    private double limite;
+    private double saldo;
+
+    public ContaBancaria(int numero, String nome, double limite, double saldoInicial) {
+        this.numero = numero;
+        this.nome = nome;
+        this.limite = limite;
+        this.saldo = saldoInicial;
+    }
+
+    public boolean sacar(double valor) {
+        if (valor <= 0 || valor > saldo + limite) {
+            System.out.println("Valor de saque inválido ou saldo insuficiente.");
+            return false;
+        }
+        saldo -= valor;
+        System.out.println("Saque de " + valor + " realizado com sucesso.");
+        return true;
+    }
