@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main {
+    int Numero
+    string nome 
+    double limite
+    double saldo
+    Scanner scan = new scanner(System.in);
+    
+    boolean scar(double v, double saldo, float saldo2, float saque)
+    {
+        if (saldo > saque)
+        {
+            saldo2 = saldo - saque;
+            return saldo2;
+            
+        }
+        else
+        {
+            return false;
+            
+        }
+    }
+    public static void Main (String[])
+}
