@@ -1,0 +1,158 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class BancoDeOrgaos {
+    private List<Pessoa> pessoas;
+    private List<Orgao> orgaos;
+
+    public BancoDeOrgaos() {
+        this.pessoas = new ArrayList<>();
+        this.orgaos = new ArrayList<>();
+    }
+
+    public void adicionarPessoa(Pessoa pessoa) {
+        pessoas.add(pessoa);
+    }
+
+    public void adicionarOrgao(Orgao orgao) {
+        orgaos.add(orgao);
+    }
+
+    public void listarPessoas() {
+        System.out.println("--- Pessoas no Banco ---");
+        for (Pessoa pessoa : pessoas) {
+            pessoa.exibirInformacoes();
+        }
+    }
+
+    public void listarOrgaosDisponiveis() {
+        System.out.println("--- Órgãos Disponíveis ---");
+        for (Orgao orgao : orgaos) {
+            if (orgao.estaDisponivel()) {
+                orgao.exibirInformacoes();
+            }
+        }
+    }
+
+    public void alocarOrgao(String cpfPaciente, String tipoOrgao) {
+        for (Orgao orgao : orgaos) {
+            if (orgao.estaDisponivel() && orgao.getTipoOrgao().equals(tipoOrgao)) {
+                System.out.println("Órgão " + tipoOrgao + " alocado a " + cpfPaciente + " com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Órgão " + tipoOrgao + " não disponível para alocação.");
+    }
+}
+public class Orgao {
+    private String tipoOrgao;
+    private Doador doador;
+
+    public Orgao(String tipoOrgao, Doador doador) {
+        this.tipoOrgao = tipoOrgao;
+        this.doador = doador;
+    }
+
+    public boolean estaDisponivel() {
+        return doador.isAptoParaDoar();
+    }
+
+    public void exibirInformacoes() {
+        System.out.println("Órgão: " + tipoOrgao + " disponível para doação.");
+    }
+
+    public String getTipoOrgao() {
+        return tipoOrgao;
+    }
+}
+public class Paciente extends Pessoa {
+    private String tipoOrgaoNecessario;
+
+    public Paciente(String nome, int idade, String cpf, String tipoSanguineo, String tipoOrgaoNecessario) {
+        super(nome, idade, cpf, tipoSanguineo);
+        this.tipoOrgaoNecessario = tipoOrgaoNecessario;
+    }
+
+    @Override
+    public void exibirInformacoes() {
+        System.out.println("Paciente: " + getNome() + " | CPF: " + getCpf() + " | Tipo Sanguíneo: " + getTipoSanguineo() +
+                " | Necessita de: " + tipoOrgaoNecessario);
+    }
+
+    public String getTipoOrgaoNecessario() {
+        return tipoOrgaoNecessario;
+    }
+}
+public class Doador extends Pessoa {
+    private boolean temDoenca;
+    private boolean aptoParaDoar;
+
+    public Doador(String nome, int idade, String cpf, String tipoSanguineo, boolean temDoenca, boolean aptoParaDoar) {
+        super(nome, idade, cpf, tipoSanguineo);
+        this.temDoenca = temDoenca;
+        this.aptoParaDoar = aptoParaDoar;
+    }
+
+    @Override
+    public void exibirInformacoes() {
+        System.out.println("Doador: " + getNome() + " | CPF: " + getCpf() + " | Tipo Sanguíneo: " + getTipoSanguineo());
+    }
+
+    public boolean isAptoParaDoar() {
+        return aptoParaDoar;
+    }
+}
+public interface Doavel {
+    void doar();
+    boolean estaDisponivelParaDoacao();
+}
+public abstract class Pessoa {
+    private String nome;
+    private int idade;
+    private String cpf;
+    private String tipoSanguineo;
+
+    public Pessoa(String nome, int idade, String cpf, String tipoSanguineo) {
+        this.nome = nome;
+        this.idade = idade;
+        this.cpf = cpf;
+        this.tipoSanguineo = tipoSanguineo;
+    }
+
+    public abstract void exibirInformacoes();
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getTipoSanguineo() {
+        return tipoSanguineo;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        BancoDeOrgaos banco = new BancoDeOrgaos();
+
+        Doador doador = new Doador("João", 30, "12345678900", "O+", false, true);
+        Paciente paciente = new Paciente("Maria", 45, "98765432100", "O+", "Rim");
+
+     
+        banco.adicionarPessoa(doador);
+        banco.adicionarPessoa(paciente);
+
+      
+        Orgao rim = new Orgao("Rim", doador);
+        banco.adicionarOrgao(rim);
+
+    
+        banco.listarPessoas();
+        banco.listarOrgaosDisponiveis();
+
+      
+        banco.alocarOrgao("98765432100", "Rim");
+    }
+}
